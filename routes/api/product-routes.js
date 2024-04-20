@@ -32,12 +32,12 @@ router.get("/:id", async (req, res) => {
       ],
     });
 
-    if (!productData[0]) {
+    if (!productData) {
       res.status(404).json({ message: "No product found with that id!" });
       return;
     }
 
-    res.status(200).json(categoryData);
+    res.status(200).json(productData);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -111,7 +111,7 @@ router.put("/:id", (req, res) => {
         });
       }
 
-      return res.json(product);
+      return res.json({ message: `Product has been updated!` });
     })
     .catch((err) => {
       // console.log(err);
@@ -128,10 +128,12 @@ router.delete("/:id", async (req, res) => {
       },
     });
 
-    if (!productData[0]) {
+    if (!productData) {
       res.status(404).json({ message: "No product found with that id!" });
       return;
     }
+
+    res.status(200).json({ message: `Product has been deleted!` });
   } catch (err) {
     res.status(500).json(err);
   }
